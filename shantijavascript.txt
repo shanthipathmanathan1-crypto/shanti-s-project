@@ -1,0 +1,29 @@
+( function( $ ) {
+
+    // --- 1. Live Text Update (HTML/Text Content) ---
+    wp.customize( 'banner_text_content', function( value ) {
+        value.bind( function( newval ) {
+            // Update the text content of the element live
+            $( '#custom-banner-text' ).text( newval );
+        } );
+    } );
+
+    // --- 2. Live Color Update (CSS Injection) ---
+    wp.customize( 'banner_bg_color', function( value ) {
+        value.bind( function( newColor ) {
+            // Apply the new background color using inline CSS
+            $( '#custom-banner-text' ).css( 'background-color', newColor );
+
+            // Example of a custom JavaScript action upon color change
+            console.log('Banner color changed to: ' + newColor);
+
+            // Example: Add a special class if the color is red
+            if (newColor === '#ff0000') {
+                 $( '#custom-banner-text' ).addClass('red-alert');
+            } else {
+                 $( '#custom-banner-text' ).removeClass('red-alert');
+            }
+        } );
+    } );
+
+} )( jQuery );

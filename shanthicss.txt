@@ -1,0 +1,8 @@
+/* Base CSS in style.css */
+.custom-banner {
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    /* The initial background color is set inline via PHP, but we can set other styles here */
+}

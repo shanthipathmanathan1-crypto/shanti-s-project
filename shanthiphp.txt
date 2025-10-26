@@ -1,0 +1,37 @@
+function mytheme_customize_register( $wp_customize ) {
+
+    // 1. Add a Section for the Banner
+    $wp_customize->add_section( 'mytheme_banner_section', array(
+        'title'    => __( 'Frontend Banner', 'mytheme' ),
+        'priority' => 10,
+    ) );
+
+    // 2. Add a Setting for the Text
+    $wp_customize->add_setting( 'banner_text_content', array(
+        'default'   => 'Welcome to my site!',
+        'transport' => 'postMessage', // 💡 Enable JS live preview
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+
+    // 3. Add a Setting for the Background Color
+    $wp_customize->add_setting( 'banner_bg_color', array(
+        'default'   => '#0073aa',
+        'transport' => 'postMessage', // 💡 Enable JS live preview
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+
+    // 4. Add Controls (Input fields in the Customizer panel)
+    $wp_customize->add_control( 'banner_text_control', array(
+        'label'    => __( 'Banner Text', 'mytheme' ),
+        'section'  => 'mytheme_banner_section',
+        'settings' => 'banner_text_content',
+        'type'     => 'text',
+    ) );
+
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'banner_color_control', array(
+        'label'    => __( 'Banner Color', 'mytheme' ),
+        'section'  => 'mytheme_banner_section',
+        'settings' => 'banner_bg_color',
+    ) ) );
+}
+add_action( 'customize_register', 'mytheme_customize_register' );
